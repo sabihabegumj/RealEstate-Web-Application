@@ -1,0 +1,1446 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.4
+-- Dumped by pg_dump version 11.4
+
+-- Started on 2019-08-25 00:22:28
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 203 (class 1259 OID 16426)
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 16424)
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2990 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- TOC entry 205 (class 1259 OID 16436)
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 16434)
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2991 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- TOC entry 201 (class 1259 OID 16418)
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- TOC entry 200 (class 1259 OID 16416)
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2992 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- TOC entry 207 (class 1259 OID 16444)
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO postgres;
+
+--
+-- TOC entry 209 (class 1259 OID 16454)
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO postgres;
+
+--
+-- TOC entry 208 (class 1259 OID 16452)
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2993 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
+
+
+--
+-- TOC entry 206 (class 1259 OID 16442)
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2994 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
+
+
+--
+-- TOC entry 211 (class 1259 OID 16462)
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO postgres;
+
+--
+-- TOC entry 210 (class 1259 OID 16460)
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_user_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2995 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
+
+
+--
+-- TOC entry 220 (class 1259 OID 24578)
+-- Name: contacts_contact; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.contacts_contact (
+    id integer NOT NULL,
+    listing character varying(200) NOT NULL,
+    listing_id integer NOT NULL,
+    name character varying(200) NOT NULL,
+    email character varying(100) NOT NULL,
+    phone character varying(100) NOT NULL,
+    message text NOT NULL,
+    contact_date timestamp with time zone NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.contacts_contact OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 24576)
+-- Name: contacts_contact_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.contacts_contact_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.contacts_contact_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2996 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: contacts_contact_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.contacts_contact_id_seq OWNED BY public.contacts_contact.id;
+
+
+--
+-- TOC entry 213 (class 1259 OID 16522)
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1259 OID 16520)
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2997 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- TOC entry 199 (class 1259 OID 16408)
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- TOC entry 198 (class 1259 OID 16406)
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2998 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- TOC entry 197 (class 1259 OID 16397)
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- TOC entry 196 (class 1259 OID 16395)
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2999 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- TOC entry 214 (class 1259 OID 16553)
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 16576)
+-- Name: listings_listing; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.listings_listing (
+    id integer NOT NULL,
+    title character varying(200) NOT NULL,
+    address character varying(200) NOT NULL,
+    city character varying(100) NOT NULL,
+    province character varying(100) NOT NULL,
+    zipcode character varying(20) NOT NULL,
+    description text NOT NULL,
+    price integer NOT NULL,
+    bedrooms integer NOT NULL,
+    bathrooms numeric(2,1) NOT NULL,
+    garage integer NOT NULL,
+    sqft integer NOT NULL,
+    lot_size numeric(5,1) NOT NULL,
+    photo_main character varying(100) NOT NULL,
+    photo_1 character varying(100) NOT NULL,
+    photo_2 character varying(100) NOT NULL,
+    photo_3 character varying(100) NOT NULL,
+    photo_4 character varying(100) NOT NULL,
+    photo_5 character varying(100) NOT NULL,
+    photo_6 character varying(100) NOT NULL,
+    is_published boolean NOT NULL,
+    list_date timestamp with time zone NOT NULL,
+    realtor_id integer NOT NULL
+);
+
+
+ALTER TABLE public.listings_listing OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16574)
+-- Name: listings_listing_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.listings_listing_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.listings_listing_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3000 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: listings_listing_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.listings_listing_id_seq OWNED BY public.listings_listing.id;
+
+
+--
+-- TOC entry 216 (class 1259 OID 16565)
+-- Name: realtors_realtor; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.realtors_realtor (
+    id integer NOT NULL,
+    name character varying(200) NOT NULL,
+    photo character varying(100) NOT NULL,
+    description text NOT NULL,
+    phone character varying(20) NOT NULL,
+    email character varying(50) NOT NULL,
+    is_mvp boolean NOT NULL,
+    hire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.realtors_realtor OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 16563)
+-- Name: realtors_realtor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.realtors_realtor_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.realtors_realtor_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3001 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: realtors_realtor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.realtors_realtor_id_seq OWNED BY public.realtors_realtor.id;
+
+
+--
+-- TOC entry 2765 (class 2604 OID 16429)
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- TOC entry 2766 (class 2604 OID 16439)
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- TOC entry 2764 (class 2604 OID 16421)
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- TOC entry 2767 (class 2604 OID 16447)
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
+
+
+--
+-- TOC entry 2768 (class 2604 OID 16457)
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
+
+
+--
+-- TOC entry 2769 (class 2604 OID 16465)
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- TOC entry 2774 (class 2604 OID 24581)
+-- Name: contacts_contact id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.contacts_contact ALTER COLUMN id SET DEFAULT nextval('public.contacts_contact_id_seq'::regclass);
+
+
+--
+-- TOC entry 2770 (class 2604 OID 16525)
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- TOC entry 2763 (class 2604 OID 16411)
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- TOC entry 2762 (class 2604 OID 16400)
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- TOC entry 2773 (class 2604 OID 16579)
+-- Name: listings_listing id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.listings_listing ALTER COLUMN id SET DEFAULT nextval('public.listings_listing_id_seq'::regclass);
+
+
+--
+-- TOC entry 2772 (class 2604 OID 16568)
+-- Name: realtors_realtor id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.realtors_realtor ALTER COLUMN id SET DEFAULT nextval('public.realtors_realtor_id_seq'::regclass);
+
+
+--
+-- TOC entry 2967 (class 0 OID 16426)
+-- Dependencies: 203
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2969 (class 0 OID 16436)
+-- Dependencies: 205
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2965 (class 0 OID 16418)
+-- Dependencies: 201
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add listing	7	add_listing
+26	Can change listing	7	change_listing
+27	Can delete listing	7	delete_listing
+28	Can view listing	7	view_listing
+29	Can add realtor	8	add_realtor
+30	Can change realtor	8	change_realtor
+31	Can delete realtor	8	delete_realtor
+32	Can view realtor	8	view_realtor
+33	Can add contact	9	add_contact
+34	Can change contact	9	change_contact
+35	Can delete contact	9	delete_contact
+36	Can view contact	9	view_contact
+\.
+
+
+--
+-- TOC entry 2971 (class 0 OID 16444)
+-- Dependencies: 207
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+9	pbkdf2_sha256$150000$5vJMEiAkfNJK$UqLXZpdru24RsbnAZlbPfjZT5X4AJvwW3Xuu6BOEAdQ=	2019-08-10 17:12:14.413594-04	f	sabiha	Sabiha	Jaggir	imsabi96@gmail.com	f	t	2019-08-02 23:37:29.271135-04
+8	pbkdf2_sha256$150000$hOFIM5VB4jjG$MqIbeOT9LgBPUvJMoR+Mp8+csVktzt/73bmvu7y4DMI=	2019-08-02 21:47:25.631255-04	f	hemanth	Hemanth	Kumar	hemanth@gmail.com	f	t	2019-08-02 21:47:25.119373-04
+7	pbkdf2_sha256$150000$B5NIz1fKSdvy$//lN5NMIYQU7ABe7VvROZVK3ovJ4xtGzCEapPlqgEI4=	2019-08-11 18:32:08.182276-04	f	sabi	Sabiha	J	jsabihabegum@gmail.com	f	t	2019-08-02 18:53:45.818977-04
+1	pbkdf2_sha256$150000$mhiAGbj2JVd1$ew7TeG/kMZcO+SRsHkXQS0UzuRv0vzvS+JqQHOziA74=	2019-08-11 18:41:04.119885-04	t	admin			jaggirh@uwindsor.ca	t	t	2019-07-31 21:40:06.580586-04
+\.
+
+
+--
+-- TOC entry 2973 (class 0 OID 16454)
+-- Dependencies: 209
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2975 (class 0 OID 16462)
+-- Dependencies: 211
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2984 (class 0 OID 24578)
+-- Dependencies: 220
+-- Data for Name: contacts_contact; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.contacts_contact (id, listing, listing_id, name, email, phone, message, contact_date, user_id) FROM stdin;
+1	761 Burnaby St	16	Sabiha J	jsabihabegum@gmail.com	2268504444	I am interested in this home	2019-08-02 17:45:24.223722-04	7
+2	401 Keele st	12	Hemanth Kumar	hemanth@gmail.com	5199999999	Is the home furnished?	2019-08-02 17:48:43.9383-04	8
+12	45 California Avenue	11	Sabiha Jaggir	imsabi96@gmail.com	5199990099	I am interested in this property	2019-08-02 19:37:59.31229-04	9
+13	401 Keele st	12	Sabiha J	jsabihabegum@gmail.com	5199990099	Please Contact	2019-08-02 19:38:58.934928-04	7
+\.
+
+
+--
+-- TOC entry 2977 (class 0 OID 16522)
+-- Dependencies: 213
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2019-07-31 22:55:32.330468-04	1	Deepika Padukone	1	[{"added": {}}]	8	1
+2	2019-07-31 22:58:48.813872-04	2	Shah Rukh Khan	1	[{"added": {}}]	8	1
+3	2019-07-31 23:00:12.176224-04	3	Varun Dhawan	1	[{"added": {}}]	8	1
+4	2019-07-31 23:00:18.070203-04	1	Deepika Padukone	2	[]	8	1
+5	2019-07-31 23:33:22.052139-04	1	1036 California Avenue	1	[{"added": {}}]	7	1
+6	2019-07-31 23:36:53.104894-04	2	2000 California Avenue	1	[{"added": {}}]	7	1
+7	2019-07-31 23:41:41.304836-04	2	401 Keele st	2	[{"changed": {"fields": ["title", "address", "city", "zipcode"]}}]	7	1
+8	2019-07-31 23:42:15.068011-04	1	1036 California Avenue	2	[{"changed": {"fields": ["realtor", "list_date"]}}]	7	1
+9	2019-07-31 23:42:27.603609-04	2	401 Keele st	2	[]	7	1
+10	2019-07-31 23:45:28.388228-04	3	481 Randolph Avenue	1	[{"added": {}}]	7	1
+11	2019-07-31 23:51:17.463684-04	4	561 Sherbourne st	1	[{"added": {}}]	7	1
+12	2019-07-31 23:54:31.03846-04	5	361 Rankin Ave	1	[{"added": {}}]	7	1
+13	2019-07-31 23:56:49.269716-04	6	761 Burnaby St	1	[{"added": {}}]	7	1
+14	2019-07-31 23:59:15.680809-04	7	566 Richards St	1	[{"added": {}}]	7	1
+15	2019-08-01 00:01:43.251906-04	8	3471 Dutch Village Rd	1	[{"added": {}}]	7	1
+16	2019-08-01 00:04:33.992629-04	9	1156 Somerville Ave	1	[{"added": {}}]	7	1
+17	2019-08-01 00:08:37.228679-04	10	190 Shannon St	1	[{"added": {}}]	7	1
+18	2019-08-01 00:40:30.239601-04	1	1036 California Avenue	2	[{"changed": {"fields": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+19	2019-08-01 00:41:22.089882-04	2	401 Keele st	2	[{"changed": {"fields": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+20	2019-08-01 00:42:24.707513-04	3	481 Randolph Avenue	2	[{"changed": {"fields": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+21	2019-08-01 00:43:12.321382-04	4	561 Sherbourne st	2	[{"changed": {"fields": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+22	2019-08-01 00:44:45.653554-04	5	361 Rankin Ave	2	[{"changed": {"fields": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+23	2019-08-01 00:55:17.501218-04	6	761 Burnaby St	2	[{"changed": {"fields": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+24	2019-08-01 00:56:52.30109-04	7	566 Richards St	2	[{"changed": {"fields": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+25	2019-08-01 00:58:29.882579-04	8	3471 Dutch Village Rd	2	[{"changed": {"fields": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+26	2019-08-01 00:59:34.348682-04	9	1156 Somerville Ave	2	[{"changed": {"fields": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+27	2019-08-01 01:00:15.865167-04	10	190 Shannon St	2	[{"changed": {"fields": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+28	2019-08-01 21:42:21.729975-04	11	45 California Avenue	1	[{"added": {}}]	7	1
+29	2019-08-01 21:47:58.42301-04	12	401 Keele st	1	[{"added": {}}]	7	1
+30	2019-08-01 21:49:32.064379-04	13	481 Randolph Avenue	1	[{"added": {}}]	7	1
+31	2019-08-01 21:51:06.976632-04	14	561 Sherbourne st	1	[{"added": {}}]	7	1
+32	2019-08-01 21:53:14.055727-04	15	361 Rankin Ave	1	[{"added": {}}]	7	1
+33	2019-08-01 21:57:09.590336-04	15	361 Rankin Ave	2	[{"changed": {"fields": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+34	2019-08-01 21:59:35.049477-04	15	361 Rankin Ave	2	[{"changed": {"fields": ["photo_main"]}}]	7	1
+35	2019-08-01 22:01:00.208552-04	15	361 Rankin Ave	2	[{"changed": {"fields": ["photo_main", "photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6"]}}]	7	1
+36	2019-08-01 22:02:14.092599-04	15	361 Rankin Ave	2	[]	7	1
+37	2019-08-01 22:02:58.812787-04	15	361 Rankin Ave	2	[{"changed": {"fields": ["photo_main"]}}]	7	1
+38	2019-08-01 22:05:37.580034-04	16	761 Burnaby St	1	[{"added": {}}]	7	1
+39	2019-08-01 22:07:13.828201-04	17	566 Richards St	1	[{"added": {}}]	7	1
+40	2019-08-01 22:09:24.560395-04	18	3471 Dutch Village Rd	1	[{"added": {}}]	7	1
+41	2019-08-01 22:12:02.528579-04	19	1156 Somerville Ave	1	[{"added": {}}]	7	1
+42	2019-08-01 22:13:50.374668-04	20	190 Shannon St	1	[{"added": {}}]	7	1
+43	2019-08-02 00:45:02.514626-04	2	Shah Rukh Khan	2	[{"changed": {"fields": ["photo"]}}]	8	1
+44	2019-08-02 00:45:28.292637-04	3	Varun Dhawan	2	[{"changed": {"fields": ["photo"]}}]	8	1
+45	2019-08-02 00:45:43.031369-04	1	Deepika Padukone	2	[{"changed": {"fields": ["photo"]}}]	8	1
+46	2019-08-02 02:31:11.845075-04	1	Deepika Padukone	2	[{"changed": {"fields": ["description"]}}]	8	1
+47	2019-08-02 02:35:34.424409-04	2	Shah Rukh Khan	2	[{"changed": {"fields": ["description"]}}]	8	1
+48	2019-08-02 02:35:58.605763-04	3	Varun Dhawan	2	[{"changed": {"fields": ["description"]}}]	8	1
+49	2019-08-02 02:36:11.584639-04	2	Shah Rukh Khan	2	[]	8	1
+50	2019-08-02 15:11:22.734482-04	20	190 Shannon St	2	[{"changed": {"fields": ["description"]}}]	7	1
+51	2019-08-02 15:54:57.841891-04	11	45 California Avenue	2	[{"changed": {"fields": ["price"]}}]	7	1
+52	2019-08-02 15:56:37.572329-04	18	3471 Dutch Village Rd	2	[{"changed": {"fields": ["price"]}}]	7	1
+53	2019-08-02 17:04:47.335675-04	11	45 California Avenue	2	[{"changed": {"fields": ["description"]}}]	7	1
+54	2019-08-02 17:05:50.125779-04	12	401 Keele st	2	[{"changed": {"fields": ["description"]}}]	7	1
+55	2019-08-02 17:06:12.745827-04	13	481 Randolph Avenue	2	[{"changed": {"fields": ["description"]}}]	7	1
+56	2019-08-02 17:06:32.128158-04	14	561 Sherbourne st	2	[{"changed": {"fields": ["description"]}}]	7	1
+57	2019-08-02 17:06:49.945058-04	15	361 Rankin Ave	2	[{"changed": {"fields": ["description"]}}]	7	1
+58	2019-08-02 17:07:15.306236-04	16	761 Burnaby St	2	[{"changed": {"fields": ["description"]}}]	7	1
+59	2019-08-02 17:07:45.961803-04	17	566 Richards St	2	[{"changed": {"fields": ["description"]}}]	7	1
+60	2019-08-02 17:08:33.387031-04	18	3471 Dutch Village Rd	2	[{"changed": {"fields": ["description"]}}]	7	1
+61	2019-08-02 17:08:57.697394-04	19	1156 Somerville Ave	2	[{"changed": {"fields": ["description"]}}]	7	1
+62	2019-08-02 17:09:28.316141-04	20	190 Shannon St	2	[{"changed": {"fields": ["description"]}}]	7	1
+63	2019-08-02 18:41:57.046744-04	2	jaggirh	3		4	1
+64	2019-08-02 18:46:49.324666-04	4	heer	3		4	1
+65	2019-08-02 18:46:49.335238-04	3	sabij	3		4	1
+66	2019-08-02 18:51:36.296633-04	5	sabi	3		4	1
+67	2019-08-02 18:53:32.936858-04	6	sabi	3		4	1
+68	2019-08-02 22:20:23.812835-04	2	Shah Rukh Khan	2	[{"changed": {"fields": ["email"]}}]	8	1
+69	2019-08-02 22:21:38.271056-04	3	Sabiha J	3		9	1
+70	2019-08-02 22:23:54.185041-04	4	Sabiha J	3		9	1
+71	2019-08-02 22:27:41.321326-04	6	Sabiha J	3		9	1
+72	2019-08-02 22:27:41.328307-04	5	Sabiha J	3		9	1
+73	2019-08-02 22:40:22.712599-04	8	Sabiha J	3		9	1
+74	2019-08-02 22:40:22.719582-04	7	Sabiha J	3		9	1
+75	2019-08-02 22:51:04.386635-04	9	Sabiha J	3		9	1
+76	2019-08-02 23:00:39.926068-04	11	Sabiha J	3		9	1
+77	2019-08-02 23:00:39.93205-04	10	Sabiha J	3		9	1
+78	2019-08-02 23:41:55.304594-04	16	761 Burnaby St	2	[{"changed": {"fields": ["description"]}}]	7	1
+79	2019-08-10 16:55:41.141819-04	11	45 California Avenue	2	[{"changed": {"fields": ["list_date"]}}]	7	1
+80	2019-08-10 16:56:21.580352-04	12	401 Keele st	2	[{"changed": {"fields": ["list_date"]}}]	7	1
+81	2019-08-10 16:56:39.952525-04	16	761 Burnaby St	2	[{"changed": {"fields": ["list_date"]}}]	7	1
+82	2019-08-10 17:05:06.290434-04	2	Shah Rukh Khan	2	[{"changed": {"fields": ["email"]}}]	8	1
+83	2019-08-11 18:22:29.691099-04	11	1036 California Avenue	2	[{"changed": {"fields": ["title", "address"]}}]	7	1
+\.
+
+
+--
+-- TOC entry 2963 (class 0 OID 16408)
+-- Dependencies: 199
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	listings	listing
+8	realtors	realtor
+9	contacts	contact
+\.
+
+
+--
+-- TOC entry 2961 (class 0 OID 16397)
+-- Dependencies: 197
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2019-07-31 21:08:09.764389-04
+2	auth	0001_initial	2019-07-31 21:08:10.455448-04
+3	admin	0001_initial	2019-07-31 21:08:11.35838-04
+4	admin	0002_logentry_remove_auto_add	2019-07-31 21:08:11.429223-04
+5	admin	0003_logentry_add_action_flag_choices	2019-07-31 21:08:11.445152-04
+6	contenttypes	0002_remove_content_type_name	2019-07-31 21:08:11.477063-04
+7	auth	0002_alter_permission_name_max_length	2019-07-31 21:08:11.483153-04
+8	auth	0003_alter_user_email_max_length	2019-07-31 21:08:11.492093-04
+9	auth	0004_alter_user_username_opts	2019-07-31 21:08:11.502064-04
+10	auth	0005_alter_user_last_login_null	2019-07-31 21:08:11.512039-04
+11	auth	0006_require_contenttypes_0002	2019-07-31 21:08:11.514034-04
+12	auth	0007_alter_validators_add_error_messages	2019-07-31 21:08:11.524016-04
+13	auth	0008_alter_user_username_max_length	2019-07-31 21:08:11.577651-04
+14	auth	0009_alter_user_last_name_max_length	2019-07-31 21:08:11.586627-04
+15	auth	0010_alter_group_name_max_length	2019-07-31 21:08:11.597627-04
+16	auth	0011_update_proxy_permissions	2019-07-31 21:08:11.607569-04
+17	sessions	0001_initial	2019-07-31 21:08:11.81624-04
+18	realtors	0001_initial	2019-07-31 21:15:27.350548-04
+19	listings	0001_initial	2019-07-31 21:15:27.517134-04
+20	contacts	0001_initial	2019-08-02 19:56:11.364929-04
+\.
+
+
+--
+-- TOC entry 2978 (class 0 OID 16553)
+-- Dependencies: 214
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+qa000vzkxhamo09m8x0pprf8479xo130	MjIwM2U3Y2M4ZjJlNzdkMTczYzA2NTYxZDBkMzljNDk1NjQxNTFjMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3OGM4ZDgxMDMwNGE0YWUxMjliZDAxYmM1M2I1MTdkNTQ4ZGUwNzM3In0=	2019-08-14 21:40:22.472358-04
+ohc3lajef8eihvt8l2j0th9aypbrw1g0	MjIwM2U3Y2M4ZjJlNzdkMTczYzA2NTYxZDBkMzljNDk1NjQxNTFjMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3OGM4ZDgxMDMwNGE0YWUxMjliZDAxYmM1M2I1MTdkNTQ4ZGUwNzM3In0=	2019-08-24 16:55:02.099235-04
+eubgclso97iszyy6chj8olpt06e80oef	MjIwM2U3Y2M4ZjJlNzdkMTczYzA2NTYxZDBkMzljNDk1NjQxNTFjMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3OGM4ZDgxMDMwNGE0YWUxMjliZDAxYmM1M2I1MTdkNTQ4ZGUwNzM3In0=	2019-08-25 18:41:04.123878-04
+\.
+
+
+--
+-- TOC entry 2982 (class 0 OID 16576)
+-- Dependencies: 218
+-- Data for Name: listings_listing; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.listings_listing (id, title, address, city, province, zipcode, description, price, bedrooms, bathrooms, garage, sqft, lot_size, photo_main, photo_1, photo_2, photo_3, photo_4, photo_5, photo_6, is_published, list_date, realtor_id) FROM stdin;
+16	761 Burnaby St	761 Burnaby St	Vancouver	BC	V6E 1N9	This home features hardwood floors throughout the main floor with ceramic in kitchen and bath,2 bedrooms and full bath. Lower level has spacious living room with fireplace, guest bedroom, bathroom, storage and Laundry room. Large deck off the kitchen with views of the fully fenced yard. This family home is move in ready, all you have to do is grab it	490000	6	3.0	2	3600	2.5	photos/2019/08/01/home-6.JPG	photos/2019/08/01/6-home-inside-1.jpg	photos/2019/08/01/6-home-inside-2.jpg	photos/2019/08/01/6-home-inside-3.jpg	photos/2019/08/01/6-home-inside-4.jpg	photos/2019/08/01/6-home-inside-5.jpg	photos/2019/08/01/6-home-inside-6.jpg	t	2019-08-07 06:30:00-04	2
+13	481 Randolph Avenue	481 Randolph Avenue	Windsor	ON	N9B 2T5	Clean, well maintained home with hardwood floors throughout in quiet Forest Glade area. Features include living room and dining room with hardwood, good size kitchen, newer ceramic bath, long bedrooms all hardwood, finished family room with gas fireplace, game room, central air.	450000	5	2.5	2	2700	2.0	photos/2019/08/01/home-3.jpg	photos/2019/08/01/3-home-inside-1.jpg	photos/2019/08/01/3-home-inside-2.jpg	photos/2019/08/01/3-home-inside-3.jpg	photos/2019/08/01/3-home-inside-4.jpg	photos/2019/08/01/3-home-inside-5.jpg	photos/2019/08/01/3-home-inside-6.jpg	t	2019-07-10 17:48:00-04	1
+14	561 Sherbourne st	561 Sherbourne st	Toronto	ON	M4X 0A1	Welcome to this well maintained, raised ranch semi in a quiet neighborhood. This home features large living rooms, bed room, kitchen, game room and a bathroom. Close to shopping, schools, parks and much more! Don't miss this opportunity to live in.	490000	4	2.0	3	3200	2.5	photos/2019/08/01/home-4.jpg	photos/2019/08/01/4-home-inside-1.jpg	photos/2019/08/01/4-home-inside-2.jpg	photos/2019/08/01/4-home-inside-3.jpg	photos/2019/08/01/4-home-inside-4.jpg	photos/2019/08/01/4-home-inside-5.jpg	photos/2019/08/01/4-home-inside-6.jpg	t	2019-07-15 11:00:00-04	2
+15	361 Rankin Ave	361 Rankin Ave	Windsor	ON	N9B 2R6	Beautiful, large brick family home! Sought after riverside location on a quiet neighborhood .Fully furnished home. Hardwood, ceramic and laminate flooring throughout. Local alarm system, in ground sprinkler system and a central AC. All appliances stay.	450000	6	1.0	2	2000	1.0	photos/2019/08/01/home5.jpg	photos/2019/08/01/5-home-inside-1.jpg	photos/2019/08/01/5-home-inside-2.jpg	photos/2019/08/01/5-home-inside-3.jpg	photos/2019/08/01/5-home-inside-4.jpg	photos/2019/08/01/5-home-inside-5.jpg	photos/2019/08/01/5-home-inside-6.jpg	t	2019-06-20 07:00:00-04	3
+17	566 Richards St	566 Richards St	Vancouver	BC	V6B 2Z5	cute and clean home on great street. New driveway just put in. Many updates through the past 10 years. Fridge, stove, dishwasher, washer and dryer stay. Hardwood floors in the living room.	650000	8	4.0	3	4000	3.0	photos/2019/08/01/home-7.jpg	photos/2019/08/01/7-home-inside-1.jpg	photos/2019/08/01/7-home-inside-2.jpg	photos/2019/08/01/7-home-inside-3.jpg	photos/2019/08/01/7-home-inside-4.jpg	photos/2019/08/01/7-home-inside-5.jpg	photos/2019/08/01/7-home-inside-6.jpg	t	2019-07-03 05:00:00-04	1
+12	401 Keele st	401 Keele st	Toronto	ON	M6P 2K9	This beautiful and well maintained home is located close to schools, shopping, restaurants. Move in and enjoy. This home has a garage for car parking.	600000	5	3.0	2	3600	2.0	photos/2019/08/01/home-2.jpg	photos/2019/08/01/2-home-inside-1.jpg	photos/2019/08/01/2-home-inside-2.jpg	photos/2019/08/01/2-home-inside-3.jpg	photos/2019/08/01/2-home-inside-4.jpg	photos/2019/08/01/2-home-inside-5.jpg	photos/2019/08/01/2-home-inside-6.jpg	t	2019-08-09 06:00:00-04	3
+20	190 Shannon St	190 Shannon St	Montreal	QC	H3C 2J2	This beautifully renovated house had a complete overhaul in 2016 including all new vinyl windows, new furnace & central air, new roof, high grade laminate & ceramic flooring throughout, stunning new kitchen with large island & granite counter tops and a brand new ceramic bath.New siding & extensive privacy fencing around the property in 2017.	580000	5	3.0	2	4000	3.5	photos/2019/08/01/home-10.jpg	photos/2019/08/01/10-home-inside-1.jpg	photos/2019/08/01/10-home-inside-2.jpg	photos/2019/08/01/10-home-inside-3.jpg	photos/2019/08/01/10-home-inside-4.jpg	photos/2019/08/01/10-home-inside-5.jpg	photos/2019/08/01/10-home-inside-6.jpg	t	2019-07-17 07:00:00-04	3
+11	1036 California Avenue	1036 California Avenue	Windsor	ON	N9B 2Z7	Affordable East-side townhouse with  private drive with parking for up to 4 cars. Enjoy a carefree lifestyle just steps away from all \r\n conveniences, parks and schools ideally situated on a quiet court! Featuring bedroom and 1 bath, living room with loads of natural light,\r\n kitchen, dining room, and laundry room with loads of storage. Walk-out to privacy fenced cement patio backing onto \r\n a green space - NO REAR NEIGHBOURS. Appliances included.	400000	3	2.0	1	3200	2.0	photos/2019/08/01/home-1.jpg	photos/2019/08/01/1-home-inside-1.jpg	photos/2019/08/01/1-home-inside-2.jpg	photos/2019/08/01/1-home-inside-3.jpg	photos/2019/08/01/1-home-inside-4.jpg	photos/2019/08/01/1-home-inside-5.jpg	photos/2019/08/01/1-home-inside-6.jpg	t	2019-08-09 14:00:00-04	2
+18	3471 Dutch Village Rd	3471 Dutch Village Rd	Halifax	NS	B3N 2S8	Don't miss out on this newly renovated home. All electrical (including in walls) and plumbing has been updated. This home also offers a bonus single car garage and rear parking.	300000	8	3.0	2	3200	2.5	photos/2019/08/01/home-8.jpg	photos/2019/08/01/8-home-inside-1.jpg	photos/2019/08/01/8-home-inside-2.jpg	photos/2019/08/01/8-home-inside-3.jpg	photos/2019/08/01/8-home-inside-4.jpg	photos/2019/08/01/8-home-inside-5.jpg	photos/2019/08/01/8-home-inside-6.jpg	t	2019-05-30 16:00:00-04	2
+19	1156 Somerville Ave	1156 Somerville Ave	Winnipeg	MV	R3T 1B7	This sprawling brick ranch is situated on a large lot, close to shopping, schools, and transportation in a quiet, well established neighborhood. Walk through the sunlit breezeway to a bright kitchen with plenty of storage. Crown molding and hardwood floors add character in bedrooms, formal dining room and cozy living room complimented with fireplace. Convenient main floor laundry.	600000	8	4.0	2	4000	3.5	photos/2019/08/01/home-9.jpg	photos/2019/08/01/9-home-inside-1.jpg	photos/2019/08/01/9-home-inside-2.jpg	photos/2019/08/01/9-home-inside-3.jpg	photos/2019/08/01/9-home-inside-4.jpg	photos/2019/08/01/9-home-inside-5.jpg	photos/2019/08/01/9-home-inside-6.jpg	t	2019-06-05 10:00:00-04	1
+\.
+
+
+--
+-- TOC entry 2980 (class 0 OID 16565)
+-- Dependencies: 216
+-- Data for Name: realtors_realtor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.realtors_realtor (id, name, photo, description, phone, email, is_mvp, hire_date) FROM stdin;
+1	Deepika Padukone	photos/2019/08/02/deepika.jpg	I can help you with the best deals in the property listings and can accompany clients to property site and can discuss conditions of sale.I am an expert in directing you towards the best property within your desired value. over 5 years of Negotiations Experience, I go the distance to ensure your best interests are protected.\r\nDiscover why I love real estate and why I am the right choice for you.	226-850-3000	deepika@realestate.co	t	2019-01-04 17:28:25-05
+3	Varun Dhawan	photos/2019/08/02/VarunDhawan.jpg	I am an agent with professional conduct, quality service and ethical behavior who can guide you in finding your dream house.Marketing and Negotiation so you get top dollar and the best deal. Stress-free and Seamless process so you can focus on the important things. Honesty and clarity in the transaction with advice based on your best interests.	226-555-2799	varun@realestate.co	f	2019-02-14 07:00:00-05
+2	Shah Rukh Khan	photos/2019/08/02/srk.jpg	High quality customer service: I’m committed to providing every single one of my amazing clients with my reputable and trusted services.\r\nLocal expert: I’m well-versed in the local market/neighborhoods which helps me to create a personalized marketing strategy for each client.\r\nSkilled negotiator: I go above and beyond to ensure my buyers are not overpaying and my sellers receive top dollar for their home.	519-999-0099	srk@realestate.co	f	2018-11-02 18:57:29-04
+\.
+
+
+--
+-- TOC entry 3002 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- TOC entry 3003 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- TOC entry 3004 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 36, true);
+
+
+--
+-- TOC entry 3005 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- TOC entry 3006 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 9, true);
+
+
+--
+-- TOC entry 3007 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- TOC entry 3008 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: contacts_contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.contacts_contact_id_seq', 13, true);
+
+
+--
+-- TOC entry 3009 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 83, true);
+
+
+--
+-- TOC entry 3010 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 9, true);
+
+
+--
+-- TOC entry 3011 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 20, true);
+
+
+--
+-- TOC entry 3012 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: listings_listing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.listings_listing_id_seq', 20, true);
+
+
+--
+-- TOC entry 3013 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: realtors_realtor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.realtors_realtor_id_seq', 3, true);
+
+
+--
+-- TOC entry 2788 (class 2606 OID 16551)
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 2793 (class 2606 OID 16488)
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- TOC entry 2796 (class 2606 OID 16441)
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2790 (class 2606 OID 16431)
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2783 (class 2606 OID 16474)
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- TOC entry 2785 (class 2606 OID 16423)
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2804 (class 2606 OID 16459)
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2807 (class 2606 OID 16503)
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- TOC entry 2798 (class 2606 OID 16449)
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2810 (class 2606 OID 16467)
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2813 (class 2606 OID 16517)
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- TOC entry 2801 (class 2606 OID 16545)
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- TOC entry 2828 (class 2606 OID 24586)
+-- Name: contacts_contact contacts_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.contacts_contact
+    ADD CONSTRAINT contacts_contact_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2816 (class 2606 OID 16531)
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2778 (class 2606 OID 16415)
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- TOC entry 2780 (class 2606 OID 16413)
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2776 (class 2606 OID 16405)
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2820 (class 2606 OID 16560)
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- TOC entry 2825 (class 2606 OID 16584)
+-- Name: listings_listing listings_listing_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.listings_listing
+    ADD CONSTRAINT listings_listing_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2823 (class 2606 OID 16573)
+-- Name: realtors_realtor realtors_realtor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.realtors_realtor
+    ADD CONSTRAINT realtors_realtor_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2786 (class 1259 OID 16552)
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- TOC entry 2791 (class 1259 OID 16489)
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- TOC entry 2794 (class 1259 OID 16490)
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- TOC entry 2781 (class 1259 OID 16475)
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- TOC entry 2802 (class 1259 OID 16505)
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
+
+
+--
+-- TOC entry 2805 (class 1259 OID 16504)
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
+
+
+--
+-- TOC entry 2808 (class 1259 OID 16519)
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- TOC entry 2811 (class 1259 OID 16518)
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- TOC entry 2799 (class 1259 OID 16546)
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- TOC entry 2814 (class 1259 OID 16542)
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- TOC entry 2817 (class 1259 OID 16543)
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- TOC entry 2818 (class 1259 OID 16562)
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- TOC entry 2821 (class 1259 OID 16561)
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- TOC entry 2826 (class 1259 OID 16590)
+-- Name: listings_listing_realtor_id_90583529; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX listings_listing_realtor_id_90583529 ON public.listings_listing USING btree (realtor_id);
+
+
+--
+-- TOC entry 2831 (class 2606 OID 16482)
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2830 (class 2606 OID 16477)
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2829 (class 2606 OID 16468)
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2833 (class 2606 OID 16497)
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2832 (class 2606 OID 16492)
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2835 (class 2606 OID 16511)
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2834 (class 2606 OID 16506)
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2836 (class 2606 OID 16532)
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2837 (class 2606 OID 16537)
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2838 (class 2606 OID 16585)
+-- Name: listings_listing listings_listing_realtor_id_90583529_fk_realtors_realtor_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.listings_listing
+    ADD CONSTRAINT listings_listing_realtor_id_90583529_fk_realtors_realtor_id FOREIGN KEY (realtor_id) REFERENCES public.realtors_realtor(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+-- Completed on 2019-08-25 00:22:28
+
+--
+-- PostgreSQL database dump complete
+--
+
