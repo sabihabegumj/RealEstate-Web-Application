@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} | About {% endblock %}
+{% block content %}
+    <section id="showcase-inner" class="py-5 text-white">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h1 class="display-4">Our Services</h1>
+                    <p class="lead">We promise to provide you the most
+                        Professional, Ethical and Informed Real Estate Services in the Industry!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <section id="bc" class="mt-3">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'index' %}">
+                            <i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="breadcrumb-item active"> About</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <section id="about" class="py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>Know why we are the best for your home search?</h2>
+                    <p class="lead" align="justify">With the help of leadership and expertise, our company is able to
+                        achieve great
+                        heights. Each member of our team is as committed to
+                        bring you the best possible experience as they are to make our company the best Real Estate
+                        Company in Canada!</p>
+                    <img src="{% static 'img/about.jpg' %}" alt="">
+                    <p class="mt-4" align="justify">In today’s challenging Real Estate market, your choice of Real
+                        Estate Professional does matter! For a greater probability of success
+                        you need a dedicated professional, one who can guide you through the process and be counted on
+                        to protect your investment.
+                        Get to know us, knowledgeable, results-oriented professional. Our most important
+                        assets are
+                        honesty and integrity.</p>
+                </div>
+                <div class="col-md-4">
+                    {% if mvp_realtors %}
+                        {% for realtor in mvp_realtors %}
+                            <div class="card">
+                                <img class="card-img-top" src="{{ realtor.photo.url }}" alt="Seller of the month">
+                                <div class="card-body">
+                                    <h5 class="card-title">Star of the Month</h5>
+                                    <h6 class="text-secondary">{{ realtor.name }}</h6>
+                                    <p class="card-text" align="justify">{{ realtor.description }}
+                                    </p>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work" class="bg-dark text-white text-center">
+        <h3 class="display-4">We are here to serve you only the Best!</h3>
+        <h5>Why still waiting? Start your search and grab a ideal home you Love</h5>
+        <hr>
+        <a href="listings.html" class="btn btn-secondary text-white btn-lg">View Our Listings</a>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="py-5">
+        <div class="container">
+            <h2 class="text-center">Our Team</h2>
+            <div class="row text-center">
+                {% if realtors %}
+                    {% for realtor in realtors %}
+                        <div class="col-md-4">
+                            <img src="{{ realtor.photo.url }}" alt="" class="rounded-circle mb-3">
+                            <h4>{{ realtor.name }}</h4>
+                            <p class="text-success">
+                                <i class="fas fa-award text-success mb-3"></i> Realtor</p>
+                            <hr>
+                            <p>
+                                <i class="fas fa-phone"></i> {{ realtor.phone }}</p>
+                            <p>
+                                <i class="fas fa-envelope-open"></i> {{ realtor.email }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-md-12">
+                        <p>No Realtors Available</p>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

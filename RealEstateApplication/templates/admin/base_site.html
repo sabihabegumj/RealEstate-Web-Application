@@ -1,0 +1,17 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Admin Panel</title>
+</head>
+</html>
+{% block branding %}
+   <h1 id = "head" style="color:#fff">
+      <img src="{% static '/img/logo.jpg' %}" alt="" height="50" width="80"
+           class="brand_img">&nbsp;&nbsp;Real Estate - Admin Panel
+   </h1>
+{% endblock %}
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock %}

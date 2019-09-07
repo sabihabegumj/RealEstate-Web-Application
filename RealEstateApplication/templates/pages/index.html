@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %} | Home {% endblock %}
+{% block content %}
+    <!-- Alerts -->
+    {% include 'partials/_alerts.html' %}
+    <!-- Showcase -->
+    <section id="showcase">
+        <div class="container text-center">
+            <div class="home-search p-5">
+                <div class="overlay p-5">
+                    <h1 class="display-4 mb-4">
+                        So Easy to Search the Property Here!
+                    </h1>
+                    <p class="lead">We value your Time and made your Property Search even Simpler.
+                        See the Properties that only match your Conditions. </p>
+                    <div class="search">
+                        <form action="{% url 'search' %}">
+                            <!-- Form Row 1 -->
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="sr-only">Keywords</label>
+                                    <input type="text" name="keywords" class="form-control"
+                                           placeholder="Try Keywords (garage, old, demolished etc)">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="sr-only">City</label>
+                                    <input type="text" name="city" class="form-control" placeholder="City">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label class="sr-only">Province</label>
+                                    <select id="Province" name="province" class="form-control">
+                                        <option selected="true" disabled="disabled">Province (All)</option>
+                                        {% for key,value in province_choices.items %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Form Row 2 -->
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="sr-only">Bedrooms</label>
+                                    <select name="bedrooms" class="form-control">
+                                        <option selected="true" disabled="disabled">Bedrooms (All)</option>
+                                        {% for key,value in bedroom_choices.items %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <select name="price" class="form-control" id="type">
+                                        <option selected="true" disabled="disabled">Price (Max Price)</option>
+                                        {% for key,value in price_choices.items %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Listings -->
+    <section id="listings" class="py-5">
+        <div class="container">
+            <h3 class="text-center mb-3">Latest Listings</h3>
+            <div class="row">
+                {% if listings %}
+                    {% for listing in listings %}
+                        <!-- Listing 1 -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card listing-preview">
+                                <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="no img">
+                                <div class="card-img-overlay">
+                                    <h2>
+                                        <span class="badge badge-secondary text-white">${{ listing.price | intcomma }}</span>
+                                    </h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="listing-heading text-center">
+                                        <h4 class="text-primary">{{ listing.title }}</h4>
+                                        <p>
+                                            <i class="fas fa-map-marker text-secondary"></i> {{ listing.city }}
+                                            {{ listing.state }}, {{ listing.zipcode }}
+                                        </p>
+                                    </div>
+                                    <hr>
+                                    <div class="row py-2 text-secondary">
+                                        <div class="col-6">
+                                            <i class="fas fa-th-large"></i> Sqft:{{ listing.sqft }} </div>
+                                        <div class="col-6">
+                                            <i class="fas fa-car"></i> Garage: {{ listing.garage }}</div>
+                                    </div>
+                                    <div class="row py-2 text-secondary">
+                                        <div class="col-6">
+                                            <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}</div>
+                                        <div class="col-6">
+                                            <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row py-2 text-secondary">
+                                        <div class="col-12">
+                                            <i class="fas fa-user"></i> {{ listing.realtor }}</div>
+                                    </div>
+                                    <div class="row text-secondary pb-2">
+                                        <div class="col-6">
+                                            <i class="fas fa-clock"></i> {{ listing.list_date | timesince }}</div>
+                                    </div>
+                                    <hr>
+                                    <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More
+                                        Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-md-12">
+                        <p>No Listings Available</p>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-5 bg-secondary text-white">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <i class="fa fa-users fa-4x mr-4"></i>
+                    <hr>
+                    <h3>Customers</h3>
+                    <p>Our customers' satisfaction is the only focus of our mission and that's why we are here to serve
+                        you only the best.The more we satisfy you, the more we grow!</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-home fa-4x mr-4"></i>
+                    <hr>
+                    <h3>Property Management</h3>
+                    <p>We list out the properties which may be one of the ideal home that you have dreamed for yours to
+                        live in.It's not only about how you live, its about where you live.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa fa-handshake fa-4x mr-4"></i>
+                    <hr>
+                    <h3>Our Services</h3>
+                    <p>Our goal is to have customer service that is not just the best, but legendary. We consider each
+                        customer as a family member who deserves nothing but the best service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
